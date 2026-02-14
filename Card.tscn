@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://4py50e25l2xu"]
+
+[ext_resource type="Script" uid="uid://whmhy6jf55aj" path="res://scripts/card.gd" id="1_hael8"]
+
+[sub_resource type="Image" id="Image_dd2wi"]
+
+[node name="Card" type="Node2D" unique_id=1809774685]
+script = ExtResource("1_hael8")
+sprite = SubResource("Image_dd2wi")

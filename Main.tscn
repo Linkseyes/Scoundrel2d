@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dsaatm7sbdfw3"]
+
+[ext_resource type="PackedScene" uid="uid://geqdqxrxrnti" path="res://Deck.tscn" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://dsc3deiq5bnev" path="res://scripts/main.gd" id="1_uu6xs"]
+
+[node name="Main" type="Node" unique_id=729807428]
+script = ExtResource("1_uu6xs")
+
+[node name="Deck" parent="." unique_id=1800380479 instance=ExtResource("1_glv2v")]
+
+[node name="StartingPosition" type="Marker2D" parent="." unique_id=432278017]
+position = Vector2(200, 200)
+scale = Vector2(5, 5)
