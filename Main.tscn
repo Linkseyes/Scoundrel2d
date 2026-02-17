@@ -2,12 +2,81 @@
 
 [ext_resource type="PackedScene" uid="uid://geqdqxrxrnti" path="res://Deck.tscn" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://dsc3deiq5bnev" path="res://scripts/main.gd" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://dvu60ttfev3f2" path="res://scripts/room_manager.gd" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://4py50e25l2xu" path="res://Card.tscn" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://bcsl7ufior7x0" path="res://Player.tscn" id="4_cm0pq"]
+[ext_resource type="Script" uid="uid://3rerd7eqmwej" path="res://scripts/room_button.gd" id="5_3dxm6"]
 
 [node name="Main" type="Node" unique_id=729807428]
 script = ExtResource("1_uu6xs")
 
-[node name="Deck" parent="." unique_id=1800380479 instance=ExtResource("1_glv2v")]
+[node name="RoomManager" type="Node" parent="." unique_id=304507287 node_paths=PackedStringArray("player")]
+script = ExtResource("2_cm0pq")
+room_size = 4
+card_scene = ExtResource("2_r0du0")
+player = NodePath("../Player")
 
-[node name="StartingPosition" type="Marker2D" parent="." unique_id=432278017]
-position = Vector2(200, 200)
+[node name="Deck" parent="RoomManager" unique_id=1800380479 instance=ExtResource("1_glv2v")]
+
+[node name="CurrentRoom" type="Node" parent="RoomManager" unique_id=230547691]
+
+[node name="CardSpawnPoints" type="Node" parent="RoomManager" unique_id=271273358]
+
+[node name="SpawnPointOne" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=1915057665]
+position = Vector2(200, 100)
+
+[node name="SpawnPointTwo" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=1539722105]
+position = Vector2(300, 100)
+
+[node name="SpawnPointThree" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=83121742]
+position = Vector2(400, 100)
+
+[node name="SpawnPointFour" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=1476255795]
+position = Vector2(500, 100)
+
+[node name="Button" type="Button" parent="RoomManager" unique_id=1029293326 node_paths=PackedStringArray("manager")]
+offset_left = 60.0
+offset_top = 280.0
+offset_right = 140.0
+offset_bottom = 312.0
+pivot_offset = Vector2(40, 16)
+disabled = true
+action_mode = 0
+text = "Button"
+script = ExtResource("5_3dxm6")
+manager = NodePath("..")
+
+[node name="DeckPosition" type="Marker2D" parent="." unique_id=432278017]
+position = Vector2(100, 100)
 scale = Vector2(5, 5)
+
+[node name="Player" parent="." unique_id=2019715754 node_paths=PackedStringArray("health_label") instance=ExtResource("4_cm0pq")]
+position = Vector2(200, 250)
+max_health = 20
+health_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="Player" unique_id=1712806102]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -25.0
+offset_right = -75.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(25, 25)
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiscardPilePosition" type="Marker2D" parent="Player" unique_id=643121820]
+position = Vector2(300, 0)
+scale = Vector2(25, 25)
+
+[node name="ArmorPosition" type="Marker2D" parent="Player" unique_id=1097545639]
+position = Vector2(100, 0)
+
+[connection signal="pressed" from="RoomManager/Button" to="RoomManager/Button" method="_on_pressed"]

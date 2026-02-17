@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://geqdqxrxrnti"]
 
-[ext_resource type="Script" uid="uid://ddvubd0aov3wn" path="res://deck.gd" id="1_kjdvm"]
-[ext_resource type="Texture2D" uid="uid://cwhl3pvwjpj1h" path="res://art/playingcards/cards_dark_alt.PNG" id="1_pyaef"]
-[ext_resource type="Script" uid="uid://brruukimkm44l" path="res://scripts/deck_collision.gd" id="3_4nk3w"]
+[ext_resource type="Script" uid="uid://ddvubd0aov3wn" path="res://scripts/deck/playing_deck.gd" id="1_kjdvm"]
+[ext_resource type="Texture2D" uid="uid://cjcvyn7derlw1" path="res://resources/deck_atlas_texture.tres" id="2_kjdvm"]
+[ext_resource type="Script" uid="uid://brruukimkm44l" path="res://scripts/deck/deck_collision.gd" id="3_4nk3w"]
+[ext_resource type="Script" uid="uid://cdqyhhrqtxled" path="res://scripts/deck/deck_generator.gd" id="4_4nk3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pyaef"]
 size = Vector2(16, 26)
@@ -12,10 +13,17 @@ scale = Vector2(5, 5)
 script = ExtResource("1_kjdvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2011587644]
-texture = ExtResource("1_pyaef")
+texture_filter = 1
+texture = ExtResource("2_kjdvm")
 region_enabled = true
 region_rect = Rect2(18, 108, 17, 26)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=579058947]
 shape = SubResource("RectangleShape2D_pyaef")
 script = ExtResource("3_4nk3w")
+
+[node name="DeckGenerator" type="Node2D" parent="." unique_id=915207400]
+script = ExtResource("4_4nk3w")
+
+[connection signal="mouse_entered" from="." to="CollisionShape2D" method="_on_deck_mouse_entered"]
+[connection signal="mouse_exited" from="." to="CollisionShape2D" method="_on_deck_mouse_exited"]

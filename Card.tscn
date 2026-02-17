@@ -1,9 +1,22 @@
 [gd_scene format=3 uid="uid://4py50e25l2xu"]
 
-[ext_resource type="Script" uid="uid://whmhy6jf55aj" path="res://scripts/card.gd" id="1_hael8"]
+[ext_resource type="Script" uid="uid://mcnv8mubrawc" path="res://scripts/card/playing_card.gd" id="1_dd2wi"]
+[ext_resource type="Texture2D" uid="uid://cjcvyn7derlw1" path="res://resources/deck_atlas_texture.tres" id="2_hael8"]
 
-[sub_resource type="Image" id="Image_dd2wi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4fkt"]
+size = Vector2(18, 26)
 
-[node name="Card" type="Node2D" unique_id=1809774685]
-script = ExtResource("1_hael8")
-sprite = SubResource("Image_dd2wi")
+[node name="Card" type="Area2D" unique_id=582366]
+scale = Vector2(5, 5)
+script = ExtResource("1_dd2wi")
+card_size = Vector2(17, 26)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128474220]
+texture_filter = 1
+texture = ExtResource("2_hael8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1751566344]
+shape = SubResource("RectangleShape2D_u4fkt")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
