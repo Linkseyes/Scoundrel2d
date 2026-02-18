@@ -1,10 +1,15 @@
+# Calls of the Button that 
 class_name RoomButton
 extends Button
 
+# The manager of the room
 @export var manager: RoomManager
+# Refresents if the player has completed the current Room
 var room_completed: bool
+# Refresents if the player can refresh the room
 var can_refresh: bool
 
+# The acts that this button can do
 enum Action {
 	REFRESH_ROOM,
 	NEXT_ROOM
@@ -29,6 +34,7 @@ func _on_pressed() -> void:
 	elif can_refresh:
 		manager.refresh_room()
 
+# Changes the action of the button when pressed
 func set_button_as(action: Action):
 	if action == Action.REFRESH_ROOM:
 		room_completed = false

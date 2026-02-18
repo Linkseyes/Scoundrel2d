@@ -36,6 +36,7 @@ func generate_new_room():
 		$CurrentRoom.add_child(new_card)
 	
 	refresh_counter -= 1
+	print($Deck.playing_deck.deck.size())
 
 func use_card(card: PlayingCard):
 	$Button.disable()
@@ -61,10 +62,9 @@ func needs_new_room() -> bool:
 func refresh_room():
 	refresh_counter = 1
 	$Button.disable()
-	var old_cards = $CurrentRoom.get_children()
 	var array: Array[Card] = []
-	for card in old_cards:
-		array.append(card)
+	for card in $CurrentRoom.get_children():
+		array.append(card.card)
 		$CurrentRoom.remove_child(card)
 	$Deck.add_cards_to_deck(array)
 	generate_new_room()
