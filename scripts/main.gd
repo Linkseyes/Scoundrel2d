@@ -1,3 +1,4 @@
+# Main class for the Main Scene
 extends Node
 
 # Called when the node enters the scene tree for the first time.
@@ -8,10 +9,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+# Method to star the game
 func new_game():
+	# Starts the Deck
 	$RoomManager/Deck.start($DeckPosition.position)
+	# Generates a new room throught the Room Manager
 	$RoomManager.generate_new_room()
-
-
-func _on_button_pressed() -> void:
-	pass # Replace with function body.
