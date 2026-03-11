@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bs6li8clyxmq5"]
+
+[ext_resource type="Script" uid="uid://cycubc0r0xu1x" path="res://scripts/hud.gd" id="1_fls4u"]
+[ext_resource type="FontFile" uid="uid://bm4f8apyqo3oa" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_1etfg"]
+
+[node name="Hud" type="CanvasLayer" unique_id=1168856909]
+script = ExtResource("1_fls4u")
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=566852953]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -43.0
+offset_bottom = 73.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_1etfg")
+theme_override_font_sizes/font_size = 60
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="." unique_id=1693451836]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -36.5
+offset_right = 576.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_1etfg")
+theme_override_font_sizes/font_size = 60
+text = "Scoundrel 2D"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="." unique_id=749995180]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -248.0
+offset_right = 100.0
+offset_bottom = -148.00055
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_1etfg")
+theme_override_font_sizes/font_size = 60
+text = "Start"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

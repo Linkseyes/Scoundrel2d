@@ -2,7 +2,7 @@
 class_name RoomButton
 extends Button
 
-# The manager of the room
+## The manager of the room
 @export var manager: RoomManager
 # Refresents if the player has completed the current Room
 var room_completed: bool

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c235awdqh3wag"
-path="res://.godot/imported/cards_dirty.PNG-f52c515127eb2c2c6caa411bacfc0c16.ctex"
+uid="uid://b4rk0rnuio5ca"
+path="res://.godot/imported/cards_dark.PNG-02641d13db2a2a4145a71d043753509b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/playingcards/cards_dirty.PNG"
-dest_files=["res://.godot/imported/cards_dirty.PNG-f52c515127eb2c2c6caa411bacfc0c16.ctex"]
+source_file="res://assets/art/playingcards/cards_dark.PNG"
+dest_files=["res://.godot/imported/cards_dark.PNG-02641d13db2a2a4145a71d043753509b.ctex"]
 
 [params]
 

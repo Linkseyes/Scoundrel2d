@@ -8,7 +8,7 @@
 size = Vector2(16, 26)
 
 [node name="Deck" type="Area2D" unique_id=1800380479]
-scale = Vector2(5, 5)
+scale = Vector2(2, 2)
 script = ExtResource("1_kjdvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2011587644]

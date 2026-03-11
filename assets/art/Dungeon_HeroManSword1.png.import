@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4rk0rnuio5ca"
-path="res://.godot/imported/cards_dark.PNG-e25ebb7df83752d10127873fc5c6df2c.ctex"
+uid="uid://corqfuktfwqfn"
+path="res://.godot/imported/Dungeon_HeroManSword1.png-f00ff73c329c1d9d040a3a6cfaf47a6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/playingcards/cards_dark.PNG"
-dest_files=["res://.godot/imported/cards_dark.PNG-e25ebb7df83752d10127873fc5c6df2c.ctex"]
+source_file="res://assets/art/Dungeon_HeroManSword1.png"
+dest_files=["res://.godot/imported/Dungeon_HeroManSword1.png-f00ff73c329c1d9d040a3a6cfaf47a6a.ctex"]
 
 [params]
 

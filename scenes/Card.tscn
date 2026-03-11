@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://4py50e25l2xu"]
+
+[ext_resource type="Script" uid="uid://mcnv8mubrawc" path="res://scripts/card/playing_card.gd" id="1_dd2wi"]
+[ext_resource type="Texture2D" uid="uid://cjcvyn7derlw1" path="res://resources/deck_atlas_texture.tres" id="2_hael8"]
+[ext_resource type="Texture2D" uid="uid://bcombqmw72ht2" path="res://resources/monster_atlas_texture.tres" id="3_4dx8l"]
+[ext_resource type="Script" uid="uid://dus2pcq717jjb" path="res://scripts/card/card_visuals.gd" id="3_qf083"]
+[ext_resource type="Texture2D" uid="uid://b01hsg282ewoi" path="res://resources/items_atlas_texture.tres" id="4_40ytf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4fkt"]
+size = Vector2(18, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dx8l"]
+size = Vector2(7.25, 7.5)
+
+[node name="Card" type="Area2D" unique_id=582366 groups=["Cards"]]
+scale = Vector2(2, 2)
+script = ExtResource("1_dd2wi")
+card_size = Vector2(17, 26)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128474220]
+texture_filter = 1
+texture = ExtResource("2_hael8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1751566344]
+shape = SubResource("RectangleShape2D_u4fkt")
+
+[node name="CardVisuals" type="Marker2D" parent="." unique_id=1404776329]
+position = Vector2(0, -30)
+script = ExtResource("3_qf083")
+monster_sprite_size = Vector2(24, 32)
+monster_sprite_offset = Vector2(48, 96)
+items_sprite_size = Vector2(24, 32)
+
+[node name="Items" type="Area2D" parent="CardVisuals" unique_id=1825157755]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CardVisuals/Items" unique_id=1877359167]
+texture_filter = 1
+texture = ExtResource("4_40ytf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardVisuals/Items" unique_id=2098549810]
+shape = SubResource("RectangleShape2D_4dx8l")
+
+[node name="Monster" type="Area2D" parent="CardVisuals" unique_id=101908681]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CardVisuals/Monster" unique_id=1557494954]
+texture_filter = 1
+texture = ExtResource("3_4dx8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardVisuals/Monster" unique_id=135973311]
+shape = SubResource("RectangleShape2D_4dx8l")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

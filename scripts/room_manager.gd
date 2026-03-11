@@ -11,10 +11,6 @@ func _ready() -> void:
 	$Button.disable()
 	refresh_counter = 0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func generate_new_room():
 	if refresh_counter <= 0:
 		$Button.set_button_as(RoomButton.Action.REFRESH_ROOM)
@@ -22,6 +18,10 @@ func generate_new_room():
 	var spaw_points = $CardSpawnPoints.get_children()
 	
 	var n_old_cards = 0
+	for card in $CurrentRoom.get_children():
+		print(card.is_in_group("Cards"))
+		print("Hello")
+	
 	if $CurrentRoom.get_child_count() > 0:
 		for card in $CurrentRoom.get_children():
 			card.position = spaw_points.get(n_old_cards).position
@@ -33,6 +33,7 @@ func generate_new_room():
 	for i in range(cards.size()):
 		var new_card = card_scene.instantiate()
 		new_card.start(spaw_points.get(n_old_cards + i).position, cards.get(i), self)
+		new_card.add_to_group("Cards")
 		$CurrentRoom.add_child(new_card)
 	
 	refresh_counter -= 1

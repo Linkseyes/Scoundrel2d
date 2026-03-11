@@ -1,26 +1,28 @@
 class_name Player
 extends Node
 
+## The Max Health of the player
 @export var max_health: int
-@export var health_label: Label
+# The current card that is serving as the current armor
 var current_armor: PlayingCard
+# The current health of the Player
 var current_health: int
+# The last card the armor was used against defended
 var last_defended: int
+# The top card of the discard pile
 var current_discard: PlayingCard
+# The number of monsters defeated
 var n_monsters_defended: int
+# Signal that goes off when the Player dies (current_heath <= 0)
+signal player_death
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func ready_player():
 	current_health = max_health
-	health_label.text = str(current_health)
+	$HealthLabel.text = str(current_health)
 	current_armor = null
 	last_defended = max_health + 1
 	current_discard = null
 	n_monsters_defended = 0
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 # Processes the player taking damage form a card
 func take_damage(card: PlayingCard):
@@ -30,7 +32,7 @@ func take_damage(card: PlayingCard):
 		damage = 14
 	else: damage = card.card.number + card.card.face
 	
-	# Determines if current armor will be used
+	# Determines if current armor will be used (effective_armor)
 	# An armor that last defended a 5 can't defend against a 6 (takes full 6 damage)
 	var effective_armor = 0
 	if damage < last_defended and current_armor != null:
@@ -45,9 +47,10 @@ func take_damage(card: PlayingCard):
 	
 	# Sets current health
 	print("current_healt=" + str(current_health))
-	if current_health < 0:
+	if current_health <= 0:
 		current_health = 0
-	health_label.text = str(current_health)
+		player_death.emit()
+	$HealthLabel.text = str(current_health)
 
 # Adds the monster card on top of the armor card
 # Aesthetic choice to make the player dont forget the last defended enemy
@@ -86,7 +89,7 @@ func heal(card: PlayingCard):
 	if current_health > max_health:
 		current_health = max_health
 	# Sets new new heath value and dicards the card
-	health_label.text = str(current_health)
+	$HealthLabel.text = str(current_health)
 	discard_card(card)
 
 # Method that moves a card to the discard pile

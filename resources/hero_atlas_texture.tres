@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://eobehku85fmr"]
+
+[ext_resource type="Texture2D" uid="uid://ch67g8g7svb0k" path="res://assets/art/Dungeon_HeroMan1.png" id="1_e2myu"]
+
+[resource]
+atlas = ExtResource("1_e2myu")
+region = Rect2(24, 96, 24, 32)

@@ -23,7 +23,7 @@ func start(pos):
 func add_cards_to_deck(cards: Array[Card]):
 	playing_deck.deck.append_array(cards)
 
-# Gets the top N cards from the Deck
+## Gets the top N cards from the Deck
 func get_top_n_cards(n_cards: int) -> Array[Card]:
 	var top_cards: Array[Card] = []
 	

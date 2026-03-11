@@ -20,15 +20,15 @@ enum Suits {
 	SPADES
 }
 
-# True if the card is a number card from the Ace to a 10 
+## True if the card is a number card from the Ace to a 10 
 @export var is_numbered_card: bool
-# True if the card is a face card: Jack, Queen, King or Joker
+## True if the card is a face card: Jack, Queen, King or Joker
 @export var is_face_card: bool
-# The number of the card if it is a card number between a 1-10 range
+## The number of the card if it is a card number between a 1-10 range
 @export_range(1,10) var number: int
-# The Face of the card
+## The Face of the card
 @export var face: Faces
-# The Suit of the card
+## The Suit of the card
 @export var suit: Suits
 
 func _init(is_num_c=false, is_face_c=false, num=0, p_face=Faces.NULL, p_suit=Suits.NULL):

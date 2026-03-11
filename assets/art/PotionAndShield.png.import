@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwhl3pvwjpj1h"
-path="res://.godot/imported/cards_dark_alt.PNG-dd0fce98ceaeaa9795f24e9b4e655b29.ctex"
+uid="uid://bcwfoth7yyc3c"
+path="res://.godot/imported/PotionAndShield.png-c050728c2aeccc3ff79e9a108d406a20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/playingcards/cards_dark_alt.PNG"
-dest_files=["res://.godot/imported/cards_dark_alt.PNG-dd0fce98ceaeaa9795f24e9b4e655b29.ctex"]
+source_file="res://assets/art/PotionAndShield.png"
+dest_files=["res://.godot/imported/PotionAndShield.png-c050728c2aeccc3ff79e9a108d406a20.ctex"]
 
 [params]
 
