@@ -16,7 +16,7 @@ func new_game():
 	
 	# Starts new game
 	# Starts the Deck
-	$RoomManager/Deck.start($RoomManager/DeckPosition.position)
+	$RoomManager/Deck.start($DeckPosition.position)
 	# Generates a new room throught the Room Manager
 	$RoomManager.generate_new_room()
 	# Starts Player
