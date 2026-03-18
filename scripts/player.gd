@@ -1,5 +1,5 @@
 class_name Player
-extends Node
+extends Area2D
 
 ## The Max Health of the player
 @export var max_health: int
@@ -16,7 +16,8 @@ var n_monsters_defended: int
 # Signal that goes off when the Player dies (current_heath <= 0)
 signal player_death
 
-func ready_player():
+func ready_player(pos: Vector2):
+	position = pos
 	current_health = max_health
 	$HealthLabel.text = str(current_health)
 	current_armor = null

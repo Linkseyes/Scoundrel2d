@@ -13,7 +13,6 @@ size = Vector2(18, 26)
 size = Vector2(7.25, 7.5)
 
 [node name="Card" type="Area2D" unique_id=582366 groups=["Cards"]]
-scale = Vector2(2, 2)
 script = ExtResource("1_dd2wi")
 card_size = Vector2(17, 26)
 

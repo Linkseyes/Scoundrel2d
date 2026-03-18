@@ -4,23 +4,17 @@
 [ext_resource type="Script" uid="uid://dsc3deiq5bnev" path="res://scripts/main.gd" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://dvu60ttfev3f2" path="res://scripts/room_manager.gd" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://4py50e25l2xu" path="res://scenes/Card.tscn" id="2_r0du0"]
-[ext_resource type="PackedScene" uid="uid://bcsl7ufior7x0" path="res://scenes/Player.tscn" id="4_cm0pq"]
 [ext_resource type="Script" uid="uid://3rerd7eqmwej" path="res://scripts/room_button.gd" id="5_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://bs6li8clyxmq5" path="res://scenes/HUD.tscn" id="7_nxtc6"]
 
 [node name="Main" type="Node2D" unique_id=2140132025]
-scale = Vector2(2, 2)
 script = ExtResource("1_uu6xs")
-player_scene = ExtResource("4_cm0pq")
 
-[node name="RoomManager" type="Node" parent="." unique_id=304507287]
+[node name="RoomManager" type="Node" parent="." unique_id=304507287 node_paths=PackedStringArray("player")]
 script = ExtResource("2_cm0pq")
 room_size = 4
 card_scene = ExtResource("2_r0du0")
-
-[node name="DeckPosition" type="Marker2D" parent="RoomManager" unique_id=432278017]
-position = Vector2(200, 360)
-scale = Vector2(2, 2)
+player = NodePath("")
 
 [node name="Deck" parent="RoomManager" unique_id=1800380479 instance=ExtResource("1_glv2v")]
 
@@ -52,8 +46,13 @@ text = "Button"
 script = ExtResource("5_3dxm6")
 manager = NodePath("..")
 
+[node name="DeckPosition" type="Marker2D" parent="." unique_id=432278017]
+position = Vector2(100, 180)
+scale = Vector2(1e-05, 1e-05)
+
 [node name="PlayerPosition" type="Marker2D" parent="." unique_id=922354030]
-position = Vector2(320, 180)
+position = Vector2(100.001, 180.0018)
+scale = Vector2(9.9999994e-11, 9.9999994e-11)
 
 [node name="HUD" parent="." unique_id=1168856909 instance=ExtResource("7_nxtc6")]
 
