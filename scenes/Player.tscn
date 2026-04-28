@@ -1,45 +1,35 @@
-[gd_scene format=3 uid="uid://bcsl7ufior7x0"]
+[gd_scene format=3 uid="uid://vbo1daowx4ce"]
 
-[ext_resource type="Script" uid="uid://b1le5rjt5kr6j" path="res://scripts/player.gd" id="1_xhfnw"]
-[ext_resource type="FontFile" uid="uid://bm4f8apyqo3oa" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_3li8b"]
-[ext_resource type="Texture2D" uid="uid://eobehku85fmr" path="res://resources/hero_atlas_texture.tres" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://b1le5rjt5kr6j" path="res://scripts/player.gd" id="1_wr50v"]
+[ext_resource type="Texture2D" uid="uid://eobehku85fmr" path="res://resources/hero_atlas_texture.tres" id="2_s8145"]
+[ext_resource type="FontFile" uid="uid://bm4f8apyqo3oa" path="res://assets/fonts/Xolonium-Regular.ttf" id="3_4680k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+[sub_resource type="LabelSettings" id="LabelSettings_3o6np"]
+font = ExtResource("3_4680k")
+font_size = 24
 
-[node name="Player" type="Area2D" unique_id=788299572]
+[node name="Player" type="Node2D" unique_id=1441293395]
 scale = Vector2(2, 2)
-script = ExtResource("1_xhfnw")
+script = ExtResource("1_wr50v")
+max_health = 20
 
-[node name="HealthLabel" type="Label" parent="." unique_id=444994398]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=687080120]
 texture_filter = 1
-anchors_preset = 8
-anchor_left = 0.5
+texture = ExtResource("2_s8145")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=241349048]
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -70.0
 offset_top = -20.0
 offset_right = -30.0
 offset_bottom = 20.0
-grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(20, 20)
-theme_override_fonts/font = ExtResource("2_3li8b")
-theme_override_font_sizes/font_size = 30
-text = "0"
+text = "99"
+label_settings = SubResource("LabelSettings_3o6np")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DiscardPilePosition" type="Marker2D" parent="." unique_id=1313586988]
-position = Vector2(300, 0)
-scale = Vector2(25, 25)
-
-[node name="ArmorPosition" type="Marker2D" parent="." unique_id=1910858783]
-position = Vector2(100, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1670602736]
-texture_filter = 1
-texture = ExtResource("2_v6fml")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1120418499]
-shape = SubResource("RectangleShape2D_3li8b")
+[node name="ArmorPosition" type="Marker2D" parent="." unique_id=1104691864]
+position = Vector2(50, 0)

@@ -2,6 +2,9 @@
 class_name PlayingDeck
 extends Area2D
 
+@onready var deck_generator: Node2D = $DeckGenerator
+
+
 var playing_deck: Deck
 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +19,7 @@ func _process(delta: float) -> void:
 # This function must be called by any sprit that creates or uses PlayingDeck
 func start(pos):
 	position = pos
-	playing_deck = $DeckGenerator.generate_scoundrel_deck()
+	playing_deck = deck_generator.generate_scoundrel_deck()
 	show()
 
 # Adds an array of cards to the bottom of the deck

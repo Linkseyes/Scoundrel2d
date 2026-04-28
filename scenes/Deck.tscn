@@ -21,6 +21,7 @@ region_rect = Rect2(18, 108, 17, 26)
 shape = SubResource("RectangleShape2D_pyaef")
 
 [node name="DeckGenerator" type="Node2D" parent="." unique_id=915207400]
+scale = Vector2(40, 40)
 script = ExtResource("4_4nk3w")
 
 [connection signal="mouse_entered" from="." to="CollisionShape2D" method="_on_deck_mouse_entered"]

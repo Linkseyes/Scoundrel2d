@@ -1,6 +1,10 @@
 class_name PlayingCard
 extends Area2D
 
+@onready var card_visuals: Marker2D = $CardVisuals
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+
 ## The size of the card in pixels: x for width, y for height
 @export var card_size: Vector2
 # The Card resourse for this card
@@ -15,6 +19,7 @@ var in_game: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("ready")
 	selected = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,7 +30,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("left_mouse_click") and selected:
 		# If the player clicked on the card, it will perform its action
 		in_game = false
-		$CardVisuals.clear_visual()
+		card_visuals.clear_visual()
 		room_manager.use_card(self)
 
 # The starting function for the Card
@@ -37,7 +42,7 @@ func start(pos: Vector2, p_card: Card, manager: RoomManager):
 	in_game = true
 	
 	set_card_sprite()
-	$CardVisuals.set_card_visual(card)
+	card_visuals.set_card_visual(card)
 	
 	show()
 
@@ -47,8 +52,8 @@ func set_card_sprite():
 	sprite_position.x = (card_size.x + 1) * (card.number + card.face)
 	sprite_position.y = (card_size.y + 1) * (card.suit -1)
 	# Enabling and setting the region for the sprite
-	$Sprite2D.region_enabled = true
-	$Sprite2D.region_rect = Rect2(sprite_position, card_size)
+	sprite_2d.region_enabled = true
+	sprite_2d.region_rect = Rect2(sprite_position, card_size)
 
 # Method called when the mouse enters the Collider2D of the card
 # Linked to the _on_mouse_entered signal 

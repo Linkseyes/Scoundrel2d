@@ -1,16 +1,21 @@
 class_name Player
 extends Node
 
+@onready var health_label: Label = $HealthLabel
+@onready var armor_position: Marker2D = $ArmorPosition
+
+
 ## The Max Health of the player
 @export var max_health: int
+@export var room_manager: RoomManager
+@export var armor_monster_card_offset: int
 # The current card that is serving as the current armor
 var current_armor: PlayingCard
 # The current health of the Player
 var current_health: int
 # The last card the armor was used against defended
 var last_defended: int
-# The top card of the discard pile
-var current_discard: PlayingCard
+
 # The number of monsters defeated
 var n_monsters_defended: int
 # Signal that goes off when the Player dies (current_heath <= 0)
@@ -18,10 +23,9 @@ signal player_death
 
 func ready_player():
 	current_health = max_health
-	$HealthLabel.text = str(current_health)
+	health_label.text = str(current_health)
 	current_armor = null
 	last_defended = max_health + 1
-	current_discard = null
 	n_monsters_defended = 0
 
 # Processes the player taking damage form a card
@@ -39,7 +43,7 @@ func take_damage(card: PlayingCard):
 		effective_armor = current_armor.card.number
 		add_monster_card_to_armor(card)
 		last_defended = damage
-	else: discard_card(card)
+	else: room_manager.discard_card(card)
 	
 	# Calculates damages for instances where the armor isn't enough (0 otherwise)
 	if damage > effective_armor:
@@ -50,7 +54,7 @@ func take_damage(card: PlayingCard):
 	if current_health <= 0:
 		current_health = 0
 		player_death.emit()
-	$HealthLabel.text = str(current_health)
+	health_label.text = str(current_health)
 
 # Adds the monster card on top of the armor card
 # Aesthetic choice to make the player dont forget the last defended enemy
@@ -58,23 +62,25 @@ func add_monster_card_to_armor(monster_card: PlayingCard):
 	# Moves the moster card to position
 	# First resets the position because it will be a child of the location
 	monster_card.position = Vector2(0,0)
-	monster_card.position.x += 40 + n_monsters_defended * 40
+	monster_card.scale = Vector2(1,1)
+	monster_card.position.x += armor_monster_card_offset + n_monsters_defended * armor_monster_card_offset
 	monster_card.z_index = current_armor.z_index + 1 + n_monsters_defended
 	# Adds the monster to the armor list
-	$ArmorPosition.add_child(monster_card)
+	armor_position.add_child(monster_card)
 	n_monsters_defended += 1
 
 # Switches the old armor card with the new one
 # Gets rid of all attatched monster cards
 func add_new_armor(new_armor: PlayingCard):
 	# Discards all cards in the Armor list (to clear the monster cards stored in there)
-	for card in $ArmorPosition.get_children():
-		$ArmorPosition.remove_child(card)
-		discard_card(card)
+	for card in armor_position.get_children():
+		armor_position.remove_child(card)
+		room_manager.discard_card(card)
 	# Adds the new Armor card to the Armor list (resets postion)
 	# First resets the position because it will be a child of the location
 	new_armor.position = Vector2(0,0)
-	$ArmorPosition.add_child(new_armor)
+	new_armor.scale = Vector2(1,1)
+	armor_position.add_child(new_armor)
 	# Set up new values
 	current_armor = new_armor
 	last_defended = max_health + 1
@@ -89,19 +95,5 @@ func heal(card: PlayingCard):
 	if current_health > max_health:
 		current_health = max_health
 	# Sets new new heath value and dicards the card
-	$HealthLabel.text = str(current_health)
-	discard_card(card)
-
-# Method that moves a card to the discard pile
-# Since, acording to the rules of the game, the players doesn't need to check the
-# discarding pile, this method deletes the old card and replaces it with the new one
-# The card in the discard pile is a child of Player so it can be rendered
-func discard_card(card: PlayingCard):
-	# Return if the card is null
-	if card == null: return
-	# Removes the current card in the discard pile
-	remove_child(current_discard)
-	# Adds the new card and moves it to position
-	add_child(card)
-	current_discard = card
-	card.position = $DiscardPilePosition.position
+	health_label.text = str(current_health)
+	room_manager.discard_card(card)

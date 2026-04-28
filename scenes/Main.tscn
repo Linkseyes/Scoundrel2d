@@ -4,35 +4,34 @@
 [ext_resource type="Script" uid="uid://dsc3deiq5bnev" path="res://scripts/main.gd" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://dvu60ttfev3f2" path="res://scripts/room_manager.gd" id="2_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://4py50e25l2xu" path="res://scenes/Card.tscn" id="2_r0du0"]
-[ext_resource type="PackedScene" uid="uid://bcsl7ufior7x0" path="res://scenes/Player.tscn" id="4_cm0pq"]
 [ext_resource type="Script" uid="uid://3rerd7eqmwej" path="res://scripts/room_button.gd" id="5_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://vbo1daowx4ce" path="res://scenes/Player.tscn" id="6_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://bs6li8clyxmq5" path="res://scenes/HUD.tscn" id="7_nxtc6"]
 
 [node name="Main" type="Node" unique_id=729807428]
 script = ExtResource("1_uu6xs")
 
-[node name="RoomManager" type="Node" parent="." unique_id=304507287 node_paths=PackedStringArray("player")]
+[node name="RoomManager" type="Node" parent="." unique_id=304507287]
 script = ExtResource("2_cm0pq")
 room_size = 4
 card_scene = ExtResource("2_r0du0")
-player = NodePath("../Player")
 
 [node name="Deck" parent="RoomManager" unique_id=1800380479 instance=ExtResource("1_glv2v")]
 
 [node name="CurrentRoom" type="Node" parent="RoomManager" unique_id=230547691]
 
-[node name="CardSpawnPoints" type="Node" parent="RoomManager" unique_id=271273358]
+[node name="CardPositions" type="Node" parent="RoomManager" unique_id=271273358]
 
-[node name="SpawnPointOne" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=1915057665]
+[node name="SpawnPointOne" type="Marker2D" parent="RoomManager/CardPositions" unique_id=1915057665]
 position = Vector2(200, 100)
 
-[node name="SpawnPointTwo" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=1539722105]
+[node name="SpawnPointTwo" type="Marker2D" parent="RoomManager/CardPositions" unique_id=1539722105]
 position = Vector2(300, 100)
 
-[node name="SpawnPointThree" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=83121742]
+[node name="SpawnPointThree" type="Marker2D" parent="RoomManager/CardPositions" unique_id=83121742]
 position = Vector2(400, 100)
 
-[node name="SpawnPointFour" type="Marker2D" parent="RoomManager/CardSpawnPoints" unique_id=1476255795]
+[node name="SpawnPointFour" type="Marker2D" parent="RoomManager/CardPositions" unique_id=1476255795]
 position = Vector2(500, 100)
 
 [node name="Button" type="Button" parent="RoomManager" unique_id=1029293326 node_paths=PackedStringArray("manager")]
@@ -47,17 +46,25 @@ text = "Button"
 script = ExtResource("5_3dxm6")
 manager = NodePath("..")
 
+[node name="DiscardPile" type="Node" parent="RoomManager" unique_id=1515918713]
+
+[node name="DiscardPilePosition" type="Marker2D" parent="RoomManager/DiscardPile" unique_id=59715846]
+position = Vector2(500, 250)
+
 [node name="DeckPosition" type="Marker2D" parent="." unique_id=432278017]
 position = Vector2(100, 100)
 scale = Vector2(5, 5)
 
-[node name="Player" parent="." unique_id=2019715754 node_paths=PackedStringArray("health_label") instance=ExtResource("4_cm0pq")]
+[node name="Player" parent="." unique_id=1441293395 node_paths=PackedStringArray("room_manager") instance=ExtResource("6_nxtc6")]
 position = Vector2(200, 250)
-max_health = 20
-health_label = NodePath("")
+room_manager = NodePath("../RoomManager")
+armor_monster_card_offset = 10
 
 [node name="HUD" parent="." unique_id=1168856909 instance=ExtResource("7_nxtc6")]
 
+[connection signal="player_added_armor" from="RoomManager" to="Player" method="add_new_armor"]
+[connection signal="player_healed" from="RoomManager" to="Player" method="heal"]
+[connection signal="player_took_damage" from="RoomManager" to="Player" method="take_damage"]
 [connection signal="pressed" from="RoomManager/Button" to="RoomManager/Button" method="_on_pressed"]
-[connection signal="player_death" from="Player" to="." method="game_over"]
+[connection signal="player_death" from="Player" to="HUD" method="show_game_over"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
