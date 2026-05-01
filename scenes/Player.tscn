@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bm4f8apyqo3oa" path="res://assets/fonts/Xolonium-Regular.ttf" id="3_4680k"]
 
 [node name="Player" type="Node2D" unique_id=1441293395]
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 script = ExtResource("1_wr50v")
 max_health = 20
 
@@ -21,10 +21,10 @@ texture_filter = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -20.0
-offset_right = -27.0
-offset_bottom = 20.0
+offset_left = -21.6
+offset_top = -52.399998
+offset_right = 21.4
+offset_bottom = -12.399998
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_4680k")

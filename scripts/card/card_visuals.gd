@@ -31,7 +31,7 @@ func set_card_visual(card: Card):
 		monster.visible = true
 		# Calculating the starting position on the AtlasTexture for this specific Card
 		var sprite_position = Vector2(0,0)
-		var card_sprite_number = int(card.number>5)
+		var card_sprite_number = int(card.number>1) + int(card.number>5)
 		# Calculation for which sprite to use assumes first sprite at (0, 0)
 		sprite_position.x = monster_sprite_size.x + (monster_sprite_size.x + monster_sprite_offset.x) * (card_sprite_number + card.face)
 		sprite_position.y = (monster_sprite_size.y + monster_sprite_offset.y) * (card.suit - 3) # -3 comes from the number of Suits

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://dbvtryyydcns0"]
+
+[ext_resource type="Texture2D" uid="uid://b2rrxarntddy3" path="res://assets/art/gui/boss_bar1-Sheet.png" id="1_ieec7"]
+
+[resource]
+atlas = ExtResource("1_ieec7")
+region = Rect2(0, 480, 384, 32)

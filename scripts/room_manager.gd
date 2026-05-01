@@ -1,7 +1,8 @@
 class_name RoomManager
 extends Node
 
-@onready var button: RoomButton = $Button
+@onready var next_button: AdvanceButton = $Next
+@onready var reroll_button: RerollButton = $Reroll
 @onready var current_room: Node = $CurrentRoom
 @onready var card_positions: Node = $CardPositions
 @onready var deck: PlayingDeck = $Deck
@@ -16,18 +17,12 @@ signal player_added_armor(card: PlayingCard)
 @export var room_size: int
 @export var card_scene: PackedScene
 # The top card of the discard pile
-var current_discard: PlayingCard
-var refresh_counter: int 
+var current_discard: PlayingCard 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	button.disable()
-	refresh_counter = 0
 
 func generate_new_room():
-	if refresh_counter <= 0:
-		button.set_button_as(RoomButton.Action.REFRESH_ROOM)
-	else: button.disable()
+	reroll_button.decrease_cooldown()
+	next_button.disabled = true
 	var spaw_points = card_positions.get_children()
 	
 	var n_old_cards = 0
@@ -45,11 +40,9 @@ func generate_new_room():
 		new_card.start(spaw_points.get(n_old_cards + i).position, cards.get(i), self)
 		new_card.add_to_group("Cards")
 	
-	refresh_counter -= 1
 	print(deck.playing_deck.deck.size())
 
 func use_card(card: PlayingCard):
-	button.disable()
 	current_room.remove_child(card)
 	
 	if card.card.suit == Card.Suits.CLUBS or card.card.suit == Card.Suits.SPADES:
@@ -64,14 +57,15 @@ func use_card(card: PlayingCard):
 	if needs_new_room():
 		generate_new_room()
 	elif current_room.get_child_count() == 1:
-		button.set_button_as(RoomButton.Action.NEXT_ROOM) 
+		next_button.disabled = false
+	else:
+		reroll_button.disabled = true
+	
 
 func needs_new_room() -> bool:
 	return current_room.get_child_count() == 0 
 
 func refresh_room():
-	refresh_counter = 1
-	button.disable()
 	var array: Array[Card] = []
 	for card in current_room.get_children():
 		array.append(card.card)

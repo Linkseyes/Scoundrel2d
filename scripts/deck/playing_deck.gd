@@ -17,8 +17,7 @@ func _process(delta: float) -> void:
 
 # The starting function for the Deck
 # This function must be called by any sprit that creates or uses PlayingDeck
-func start(pos):
-	position = pos
+func start():
 	playing_deck = deck_generator.generate_scoundrel_deck()
 	show()
 

@@ -14,11 +14,10 @@ func new_game():
 	get_tree().call_group("Cards", "queue_free")
 	await get_tree().create_timer(0.01).timeout
 	
-	hud.update_score(0)
 	hud.show_message("")
 	
 	# Starts the Deck
-	deck.start(deck_position.position)
+	deck.start()
 	# Generates a new room throught the Room Manager
 	room_manager.generate_new_room()
 	# Starts Player
