@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b1le5rjt5kr6j" path="res://scripts/player.gd" id="1_wr50v"]
 [ext_resource type="Texture2D" uid="uid://eobehku85fmr" path="res://resources/hero_atlas_texture.tres" id="2_s8145"]
-[ext_resource type="FontFile" uid="uid://bm4f8apyqo3oa" path="res://assets/fonts/Xolonium-Regular.ttf" id="3_4680k"]
+[ext_resource type="Texture2D" uid="uid://dvjrewvltcdi3" path="res://resources/hero_hp_bar.tres" id="3_3li8b"]
+[ext_resource type="Texture2D" uid="uid://b01hsg282ewoi" path="res://resources/items_atlas_texture.tres" id="3_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://d0ry5a57cnqnr" path="res://assets/art/gui/heart_counter-Sheet.png" id="4_mdl7e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu4a1"]
+atlas = ExtResource("4_mdl7e")
+region = Rect2(0, 1920, 336, 32)
 
 [node name="Player" type="Node2D" unique_id=1441293395]
 scale = Vector2(2.5, 2.5)
@@ -11,24 +17,55 @@ max_health = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=687080120]
 texture_filter = 1
+position = Vector2(0, -2.4000006)
 texture = ExtResource("2_s8145")
 
 [node name="ArmorPosition" type="Marker2D" parent="." unique_id=1104691864]
 position = Vector2(50, 0)
 
-[node name="HealthLabel" type="Label" parent="." unique_id=241349048]
+[node name="ArmorSlot" type="Sprite2D" parent="." unique_id=594418983]
 texture_filter = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -21.6
-offset_top = -52.399998
-offset_right = 21.4
-offset_bottom = -12.399998
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_4680k")
-theme_override_font_sizes/font_size = 30
-text = "99"
-horizontal_alignment = 1
-vertical_alignment = 1
+position = Vector2(25, 0)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_mdl7e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1598354940]
+visible = false
+
+[node name="HealthOrbs" type="TextureProgressBar" parent="CanvasLayer" unique_id=834373809]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_top = -29.600006
+offset_right = 176.00003
+offset_bottom = -20.600006
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.75, 1.79)
+pivot_offset = Vector2(168, 16)
+max_value = 20.0
+step = 0.0
+texture_progress = ExtResource("3_3li8b")
+
+[node name="HeroHealthBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=844059055]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -167.99995
+offset_top = -56.0
+offset_right = 168.00006
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(168, 16)
+max_value = 20.0
+step = 0.0
+texture_under = SubResource("AtlasTexture_qu4a1")

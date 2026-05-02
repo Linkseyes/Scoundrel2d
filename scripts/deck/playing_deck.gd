@@ -2,25 +2,24 @@
 class_name PlayingDeck
 extends Area2D
 
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var deck_generator: Node2D = $DeckGenerator
+@onready var deck_health_bar: TextureProgressBar = $CanvasLayer/DeckHealthBar
 
-
+@export var max_health: int
+var current_health: int
 var playing_deck: Deck
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+signal deck_defeated
 
 # The starting function for the Deck
 # This function must be called by any sprit that creates or uses PlayingDeck
 func start():
 	playing_deck = deck_generator.generate_scoundrel_deck()
 	show()
-
+	canvas_layer.visible = true
+	set_health(max_health)
+	
 # Adds an array of cards to the bottom of the deck
 func add_cards_to_deck(cards: Array[Card]):
 	playing_deck.deck.append_array(cards)
@@ -38,3 +37,14 @@ func get_top_n_cards(n_cards: int) -> Array[Card]:
 		n += 1
 	
 	return top_cards 
+
+func take_damage(damage: int):
+	current_health -= damage
+	if current_health <= 0:
+		emit_signal("deck_defeated")
+	set_health(current_health)
+
+func set_health(health: int):
+	current_health = health
+	var tween = create_tween()
+	tween.tween_property(deck_health_bar, "value", current_health, 1).set_trans(Tween.TRANS_SINE).set_delay(0)

@@ -2,6 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bcwfoth7yyc3c" path="res://assets/art/PotionAndShield.png" id="1_pd1k7"]
 
-[resource]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd1k7"]
 atlas = ExtResource("1_pd1k7")
-region = Rect2(0, 0, 72, 64)
+region = Rect2(0, 0, 48, 48)
+
+[resource]
+atlas = SubResource("AtlasTexture_pd1k7")
+region = Rect2(0, 0, 48, 48)

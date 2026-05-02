@@ -1,7 +1,7 @@
 class_name PlayingCard
 extends Area2D
 
-@onready var card_visuals: Marker2D = $CardVisuals
+@onready var card_visuals: CardVisuals = $CardVisuals
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 
@@ -42,7 +42,7 @@ func start(pos: Vector2, p_card: Card, manager: RoomManager):
 	in_game = true
 	
 	set_card_sprite()
-	card_visuals.set_card_visual(card)
+	card_visuals.set_card_visual()
 	
 	show()
 

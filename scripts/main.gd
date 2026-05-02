@@ -1,7 +1,7 @@
 # Main class for the Main Scene
 extends Node
 
-@onready var hud: CanvasLayer = $HUD
+@onready var hud: CanvasLayer = $Start
 @onready var deck: PlayingDeck = $RoomManager/Deck
 @onready var room_manager: RoomManager = $RoomManager
 @onready var player: Player = $Player

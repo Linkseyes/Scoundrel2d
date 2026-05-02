@@ -6,6 +6,14 @@
 [node name="Hud" type="CanvasLayer" unique_id=1168856909]
 script = ExtResource("1_fls4u")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=123156455]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2197831, 0.16490799, 0.13570327, 1)
+
 [node name="Message" type="Label" parent="." unique_id=1693451836]
 texture_filter = 1
 anchors_preset = 8

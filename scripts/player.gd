@@ -1,8 +1,10 @@
 class_name Player
 extends Node
 
-@onready var health_label: Label = $HealthLabel
 @onready var armor_position: Marker2D = $ArmorPosition
+@onready var hero_health_bar: TextureProgressBar = $CanvasLayer/HealthOrbs
+@onready var armor_slot: Sprite2D = $"ArmorSlot"
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 
 ## The Max Health of the player
@@ -20,13 +22,17 @@ var last_defended: int
 var n_monsters_defended: int
 # Signal that goes off when the Player dies (current_heath <= 0)
 signal player_death
+signal monster_defeated(monster_number: int)
 
 func ready_player():
 	current_health = max_health
-	health_label.text = str(current_health)
+	canvas_layer.visible = true
+	set_health_ui(current_health)
 	current_armor = null
 	last_defended = max_health + 1
 	n_monsters_defended = 0
+	armor_slot.region_enabled = true
+	armor_slot.region_rect = Rect2(Vector2(0,32), Vector2(16,16))
 
 # Processes the player taking damage form a card
 func take_damage(card: PlayingCard):
@@ -53,8 +59,10 @@ func take_damage(card: PlayingCard):
 	print("current_healt=" + str(current_health))
 	if current_health <= 0:
 		current_health = 0
-		player_death.emit()
-	health_label.text = str(current_health)
+		emit_signal("player_death")
+	else:
+		emit_signal("monster_defeated", damage)
+	set_health_ui(current_health)
 
 # Adds the monster card on top of the armor card
 # Aesthetic choice to make the player dont forget the last defended enemy
@@ -85,6 +93,7 @@ func add_new_armor(new_armor: PlayingCard):
 	current_armor = new_armor
 	last_defended = max_health + 1
 	n_monsters_defended = 0
+	armor_slot.region_rect = new_armor.card_visuals.get_visual()
 
 # Heals the player by the ammount on the card
 # The maximum ammount of heath is determined by max_health
@@ -95,5 +104,9 @@ func heal(card: PlayingCard):
 	if current_health > max_health:
 		current_health = max_health
 	# Sets new new heath value and dicards the card
-	health_label.text = str(current_health)
+	set_health_ui(current_health)
 	room_manager.discard_card(card)
+
+func set_health_ui(new_health: int):
+	var tween = create_tween()
+	tween.tween_property(hero_health_bar, "value", new_health, 1).set_trans(Tween.TRANS_SINE).set_delay(0)
