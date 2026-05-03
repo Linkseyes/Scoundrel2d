@@ -34,7 +34,6 @@ scale = Vector2(40, 40)
 script = ExtResource("4_4nk3w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1166048472]
-visible = false
 
 [node name="DeckHealthBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=30363823]
 texture_filter = 1
@@ -46,7 +45,7 @@ offset_top = 9.0
 offset_right = 96.0
 offset_bottom = 41.0
 grow_horizontal = 2
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 max_value = 208.0
 texture_under = SubResource("AtlasTexture_lk6u7")
 texture_progress = SubResource("AtlasTexture_l3jxq")

@@ -8,7 +8,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qu4a1"]
 atlas = ExtResource("4_mdl7e")
-region = Rect2(0, 1920, 336, 32)
+region = Rect2(0, 1920, 291, 32)
 
 [node name="Player" type="Node2D" unique_id=1441293395]
 scale = Vector2(2.5, 2.5)
@@ -39,16 +39,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -119.0
-offset_top = -29.600006
-offset_right = 176.00003
-offset_bottom = -20.600006
+offset_left = -66.0
+offset_top = -20.0
+offset_right = 197.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.75, 1.79)
+scale = Vector2(2, 2.046)
 pivot_offset = Vector2(168, 16)
 max_value = 20.0
 step = 0.0
+value = 20.0
 texture_progress = ExtResource("3_3li8b")
 
 [node name="HeroHealthBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=844059055]
@@ -58,14 +59,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -167.99995
-offset_top = -56.0
-offset_right = 168.00006
-offset_bottom = -24.0
+offset_left = -145.0
+offset_top = -51.0
+offset_right = 146.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.75, 1.75)
-pivot_offset = Vector2(168, 16)
+scale = Vector2(2, 2)
+pivot_offset = Vector2(145.5, 16)
 max_value = 20.0
 step = 0.0
 texture_under = SubResource("AtlasTexture_qu4a1")
