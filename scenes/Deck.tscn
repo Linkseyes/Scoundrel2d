@@ -10,11 +10,11 @@ size = Vector2(16, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lk6u7"]
 atlas = ExtResource("4_3d78h")
-region = Rect2(0, 448, 384, 32)
+region = Rect2(0, 448, 292, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3jxq"]
 atlas = ExtResource("4_3d78h")
-region = Rect2(0, 480, 384, 32)
+region = Rect2(0, 480, 292, 32)
 
 [node name="Deck" type="Area2D" unique_id=1800380479]
 scale = Vector2(2, 2)
@@ -34,16 +34,16 @@ scale = Vector2(40, 40)
 script = ExtResource("4_4nk3w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1166048472]
+visible = false
 
 [node name="DeckHealthBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=30363823]
 texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -288.0
-offset_top = 9.0
-offset_right = 96.0
-offset_bottom = 41.0
+offset_left = -292.0
+offset_top = 3.0
+offset_bottom = 35.0
 grow_horizontal = 2
 scale = Vector2(2, 2)
 max_value = 208.0

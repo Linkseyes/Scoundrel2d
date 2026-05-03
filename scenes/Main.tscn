@@ -85,7 +85,6 @@ room_manager = NodePath("../RoomManager")
 armor_monster_card_offset = 10
 
 [node name="Start" parent="." unique_id=1168856909 instance=ExtResource("7_nxtc6")]
-visible = false
 
 [node name="world" type="Node" parent="." unique_id=696306895]
 
