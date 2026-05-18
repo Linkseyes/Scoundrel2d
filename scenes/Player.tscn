@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://b1le5rjt5kr6j" path="res://scripts/player.gd" id="1_wr50v"]
 [ext_resource type="Texture2D" uid="uid://eobehku85fmr" path="res://resources/hero_atlas_texture.tres" id="2_s8145"]
-[ext_resource type="Texture2D" uid="uid://dvjrewvltcdi3" path="res://resources/hero_hp_bar.tres" id="3_3li8b"]
 [ext_resource type="Texture2D" uid="uid://b01hsg282ewoi" path="res://resources/items_atlas_texture.tres" id="3_mdl7e"]
 [ext_resource type="Texture2D" uid="uid://d0ry5a57cnqnr" path="res://assets/art/gui/heart_counter-Sheet.png" id="4_mdl7e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qu4a1"]
 atlas = ExtResource("4_mdl7e")
 region = Rect2(0, 1920, 291, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdl7e"]
+atlas = ExtResource("4_mdl7e")
+region = Rect2(28, 1967, 257, 9)
 
 [node name="Player" type="Node2D" unique_id=1441293395]
 scale = Vector2(2.5, 2.5)
@@ -32,26 +35,6 @@ texture = ExtResource("3_mdl7e")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1598354940]
 visible = false
 
-[node name="HealthOrbs" type="TextureProgressBar" parent="CanvasLayer" unique_id=834373809]
-texture_filter = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -66.0
-offset_top = -20.0
-offset_right = 197.0
-offset_bottom = -11.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2, 2.046)
-pivot_offset = Vector2(168, 16)
-max_value = 20.0
-step = 0.0
-value = 20.0
-texture_progress = ExtResource("3_3li8b")
-
 [node name="HeroHealthBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=844059055]
 texture_filter = 1
 anchors_preset = 7
@@ -69,4 +52,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(145.5, 16)
 max_value = 20.0
 step = 0.0
+value = 9.0
 texture_under = SubResource("AtlasTexture_qu4a1")
+texture_progress = SubResource("AtlasTexture_mdl7e")
+texture_progress_offset = Vector2(28, 15)

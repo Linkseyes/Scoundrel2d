@@ -2,7 +2,7 @@ class_name Player
 extends Node
 
 @onready var armor_position: Marker2D = $ArmorPosition
-@onready var hero_health_bar: TextureProgressBar = $CanvasLayer/HealthOrbs
+@onready var hero_health_bar: TextureProgressBar = $CanvasLayer/HeroHealthBar
 @onready var armor_slot: Sprite2D = $"ArmorSlot"
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
