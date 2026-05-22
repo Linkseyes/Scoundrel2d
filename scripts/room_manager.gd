@@ -8,6 +8,7 @@ extends Node
 @onready var deck: PlayingDeck = $Deck
 @onready var discard_pile: Node = $DiscardPile
 @onready var discard_pile_pos: Marker2D = $DiscardPile/DiscardPilePosition
+@onready var player: Player = $"../Player"
 
 
 signal player_took_damage(card: PlayingCard)
@@ -18,6 +19,17 @@ signal player_added_armor(card: PlayingCard)
 @export var card_scene: PackedScene
 # The top card of the discard pile
 var current_discard: PlayingCard 
+
+func start_game():
+	generate_new_room()
+	next_button.activate()
+	reroll_button.activate()
+
+func end_game():
+	for card in current_room.get_children():
+		card.deactivate_card()
+	next_button.deactivate()
+	reroll_button.deactivate()
 
 
 func generate_new_room():
@@ -36,8 +48,9 @@ func generate_new_room():
 	
 	for i in range(cards.size()):
 		var new_card = card_scene.instantiate()
+		new_card.card_used.connect(use_card)
 		current_room.add_child(new_card)
-		new_card.start(spaw_points.get(n_old_cards + i).position, cards.get(i), self)
+		new_card.start(spaw_points.get(n_old_cards + i).position, cards.get(i))
 		new_card.add_to_group("Cards")
 	
 	print(deck.playing_deck.deck.size())
@@ -53,6 +66,9 @@ func use_card(card: PlayingCard):
 		
 	elif card.card.suit == Card.Suits.DIAMONDS:
 		emit_signal("player_added_armor", card)
+	
+	if player.current_health <= 0:
+		return
 	
 	if needs_new_room():
 		generate_new_room()

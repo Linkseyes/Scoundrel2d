@@ -18,7 +18,7 @@ func show_game_loss():
 	await get_tree().create_timer(1.0).timeout
 	start_button.text = "Try Again"
 	start_button.show()
-	
+
 func show_game_won():
 	show_message("You Won!")
 	

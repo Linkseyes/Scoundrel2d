@@ -39,7 +39,7 @@ position = Vector2(425, 110)
 [node name="SpawnPointFour" type="Marker2D" parent="RoomManager/CardPositions" unique_id=1476255795]
 position = Vector2(530, 110)
 
-[node name="Next" type="Button" parent="RoomManager" unique_id=1029293326 node_paths=PackedStringArray("manager")]
+[node name="Next" type="Button" parent="RoomManager" unique_id=1029293326]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -54,9 +54,8 @@ toggle_mode = true
 action_mode = 0
 text = "Next"
 script = ExtResource("5_3dxm6")
-manager = NodePath("..")
 
-[node name="Reroll" type="Button" parent="RoomManager" unique_id=2025721033 node_paths=PackedStringArray("manager")]
+[node name="Reroll" type="Button" parent="RoomManager" unique_id=2025721033]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -70,7 +69,6 @@ toggle_mode = true
 action_mode = 0
 text = "Reroll"
 script = ExtResource("7_wp0k4")
-manager = NodePath("..")
 action_cooldown = 1
 
 [node name="DiscardPile" type="Node" parent="RoomManager" unique_id=1515918713]
@@ -103,9 +101,11 @@ tile_set = ExtResource("8_jlsqs")
 [connection signal="player_added_armor" from="RoomManager" to="Player" method="add_new_armor"]
 [connection signal="player_healed" from="RoomManager" to="Player" method="heal"]
 [connection signal="player_took_damage" from="RoomManager" to="Player" method="take_damage"]
-[connection signal="deck_defeated" from="RoomManager/Deck" to="Start" method="show_game_won"]
+[connection signal="deck_defeated" from="RoomManager/Deck" to="." method="on_game_won"]
+[connection signal="advance_button_pressed" from="RoomManager/Next" to="RoomManager" method="generate_new_room"]
 [connection signal="pressed" from="RoomManager/Next" to="RoomManager/Next" method="_on_pressed"]
 [connection signal="pressed" from="RoomManager/Reroll" to="RoomManager/Reroll" method="_on_pressed"]
+[connection signal="reroll_button_pressed" from="RoomManager/Reroll" to="RoomManager" method="refresh_room"]
 [connection signal="monster_defeated" from="Player" to="RoomManager/Deck" method="take_damage"]
-[connection signal="player_death" from="Player" to="Start" method="show_game_loss"]
+[connection signal="player_death" from="Player" to="." method="on_game_lost"]
 [connection signal="start_game" from="Start" to="." method="new_game"]

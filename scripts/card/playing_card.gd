@@ -4,17 +4,16 @@ extends Area2D
 @onready var card_visuals: CardVisuals = $CardVisuals
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-
 ## The size of the card in pixels: x for width, y for height
 @export var card_size: Vector2
 # The Card resourse for this card
 var card: Card
 # If this card is being selected by the mouse
 var selected: bool
-# The RoomManager that created the card (used to comunicate back)
-var room_manager: RoomManager
 # If the card in in the game or in the discard pile
 var in_game: bool
+
+signal card_used(card: PlayingCard)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,14 +30,14 @@ func _process(delta: float) -> void:
 		# If the player clicked on the card, it will perform its action
 		in_game = false
 		card_visuals.clear_visual()
-		room_manager.use_card(self)
+		emit_signal("card_used", self)
+	
 
 # The starting function for the Card
 # This function must be called by any sprit that creates PlayingCards
-func start(pos: Vector2, p_card: Card, manager: RoomManager):
+func start(pos: Vector2, p_card: Card):
 	position = pos
 	card = p_card
-	room_manager = manager
 	in_game = true
 	
 	set_card_sprite()
@@ -64,3 +63,6 @@ func _on_mouse_entered() -> void:
 # Linked to the _on_mouse_exited signal 
 func _on_mouse_exited() -> void:
 	selected = false
+
+func deactivate_card():
+	in_game = false

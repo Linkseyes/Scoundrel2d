@@ -2,8 +2,19 @@
 class_name AdvanceButton
 extends Button
 
-## The manager of the room
-@export var manager: RoomManager
+var active: bool
+
+signal advance_button_pressed
+
+func _ready() -> void:
+	active = true
 
 func _on_pressed() -> void:
-	manager.generate_new_room()
+	if active:
+		emit_signal("advance_button_pressed")
+
+func activate():
+	active = true
+
+func deactivate():
+	active = false
