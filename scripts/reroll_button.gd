@@ -6,15 +6,18 @@ extends Button
 @export var action_cooldown: int
 
 var cooldown_counter: int = 0
-var active: bool
 
 signal reroll_button_pressed
 
 func _ready() -> void:
-	active = true
+	disabled = false
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("e_key") and !disabled:
+		_on_pressed()
 
 func _on_pressed() -> void:
-	if cooldown_counter <= 0 and active:
+	if cooldown_counter <= 0 and !disabled:
 		emit_signal("reroll_button_pressed")
 		cooldown_counter = action_cooldown
 		disabled = true
@@ -25,7 +28,7 @@ func decrease_cooldown():
 		disabled = false
 
 func activate():
-	active = true
+	disabled = false
 
 func deactivate():
-	active = false
+	disabled = true

@@ -2,19 +2,20 @@
 class_name AdvanceButton
 extends Button
 
-var active: bool
-
 signal advance_button_pressed
 
 func _ready() -> void:
-	active = true
+	disabled = true
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("q_key") and !disabled:
+		_on_pressed()
 
 func _on_pressed() -> void:
-	if active:
-		emit_signal("advance_button_pressed")
+	emit_signal("advance_button_pressed")
 
 func activate():
-	active = true
+	disabled = false
 
 func deactivate():
-	active = false
+	disabled = true

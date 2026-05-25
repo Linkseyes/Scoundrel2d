@@ -5,6 +5,36 @@
 [ext_resource type="Texture2D" uid="uid://bcombqmw72ht2" path="res://resources/monster_atlas_texture.tres" id="3_4dx8l"]
 [ext_resource type="Script" uid="uid://dus2pcq717jjb" path="res://scripts/card/card_visuals.gd" id="3_qf083"]
 [ext_resource type="Texture2D" uid="uid://bcwfoth7yyc3c" path="res://assets/art/PotionAndShield.png" id="4_40ytf"]
+[ext_resource type="Texture2D" uid="uid://cgxkdjl3y5eqd" path="res://assets/art/playingcards/highlight.png" id="6_5273u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulcbd"]
+atlas = ExtResource("6_5273u")
+region = Rect2(0, 0, 23, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nii3k"]
+atlas = ExtResource("6_5273u")
+region = Rect2(23, 0, 23, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg1gp"]
+atlas = ExtResource("6_5273u")
+region = Rect2(46, 0, 23, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lcyhw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulcbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nii3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg1gp")
+}],
+"loop": true,
+"name": &"card_highlight",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4fkt"]
 size = Vector2(18, 26)
@@ -17,10 +47,89 @@ region = Rect2(0, 0, 48, 48)
 atlas = SubResource("AtlasTexture_5273u")
 region = Rect2(0, 0, 48, 32)
 
+[sub_resource type="Animation" id="Animation_qbjcq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Highlight:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5273u"]
+resource_name = "card_highlight"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Highlight:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"card_highlight"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Highlight:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qbjcq"]
+_data = {
+&"RESET": SubResource("Animation_qbjcq"),
+&"card_highlight": SubResource("Animation_5273u")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dqwud"]
+animation = &"card_highlight"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hddve"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_50dou"]
+graph_offset = Vector2(-393.0608, 25.441986)
+nodes/output/position = Vector2(580, 140)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_dqwud")
+nodes/Animation/position = Vector2(180, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_hddve")
+nodes/TimeScale/position = Vector2(420, 80)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5273u"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nii3k"]
+states/Start/position = Vector2(239, 100)
+states/highlight/node = SubResource("AnimationNodeBlendTree_50dou")
+states/highlight/position = Vector2(560, 100)
+transitions = ["Start", "highlight", SubResource("AnimationNodeStateMachineTransition_5273u")]
+graph_offset = Vector2(-59, 4)
+
 [node name="Card" type="Area2D" unique_id=582366 groups=["Cards"]]
 scale = Vector2(3, 3)
 script = ExtResource("1_dd2wi")
 card_size = Vector2(17, 26)
+
+[node name="Highlight" type="AnimatedSprite2D" parent="." unique_id=1124597252]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_lcyhw")
+animation = &"card_highlight"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128474220]
 texture_filter = 1
@@ -48,6 +157,14 @@ visible = false
 texture_filter = 1
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("3_4dx8l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=268076214]
+libraries/ = SubResource("AnimationLibrary_qbjcq")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1093729859]
+tree_root = SubResource("AnimationNodeStateMachine_nii3k")
+anim_player = NodePath("../AnimationPlayer")
+parameters/highlight/TimeScale/scale = 0.5
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
