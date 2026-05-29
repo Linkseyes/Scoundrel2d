@@ -5,12 +5,11 @@ extends Node
 @onready var deck: PlayingDeck = $RoomManager/Deck
 @onready var room_manager: RoomManager = $RoomManager
 @onready var player: Player = $Player
-@onready var deck_position: Marker2D = $DeckPosition
 
 # Method to star the game
 func new_game():
 	# Clear old game
-	get_tree().call_group("Cards", "queue_free")
+	get_tree().call_group("Slots", "delete_card")
 	await get_tree().create_timer(0.01).timeout
 	
 	hud.show_message("")
@@ -24,7 +23,7 @@ func new_game():
 	
 
 func on_game_lost():
-	#get_tree().call_group("Cards", "deactivate_card")
+	get_tree().call_group("Cards", "deactivate_card")
 	room_manager.end_game()
 	hud.show_game_loss()
 

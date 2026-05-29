@@ -129,7 +129,7 @@ card_size = Vector2(17, 26)
 visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lcyhw")
-animation = &"card_highlight"
+animation = &""
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128474220]
 texture_filter = 1

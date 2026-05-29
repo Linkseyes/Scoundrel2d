@@ -3,13 +3,12 @@ extends Node
 
 @onready var armor_position: Marker2D = $ArmorPosition
 @onready var hero_health_bar: TextureProgressBar = $CanvasLayer/HeroHealthBar
+@onready var hero_blink_bar: TextureProgressBar = $CanvasLayer/HeroBlinkBar
 @onready var armor_slot: Sprite2D = $"ArmorSlot"
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
-
 ## The Max Health of the player
 @export var max_health: int
-@export var room_manager: RoomManager
 @export var armor_monster_card_offset: int
 # The current card that is serving as the current armor
 var current_armor: PlayingCard
@@ -23,6 +22,8 @@ var n_monsters_defended: int
 # Signal that goes off when the Player dies (current_heath <= 0)
 signal player_death
 signal monster_defeated(monster_number: int)
+signal dispose_of_cards(cards: Array[PlayingCard])
+signal card_finished_action
 
 func ready_player():
 	current_health = max_health
@@ -35,34 +36,39 @@ func ready_player():
 	armor_slot.region_rect = Rect2(Vector2(0,32), Vector2(16,16))
 
 # Processes the player taking damage form a card
-func take_damage(card: PlayingCard):
-	# Corrects the damage made by the Ace card (does 1 because of number but should do 14)
-	var damage = 0
-	if card.card.number == 1:
-		damage = 14
-	else: damage = card.card.number + card.card.face
-	
-	# Determines if current armor will be used (effective_armor)
-	# An armor that last defended a 5 can't defend against a 6 (takes full 6 damage)
-	var effective_armor = 0
-	if damage < last_defended and current_armor != null:
-		effective_armor = current_armor.card.number
-		add_monster_card_to_armor(card)
-		last_defended = damage
-	else: room_manager.discard_card(card)
+func take_damage(monster_card: PlayingCard):
+	var damage_to_take = calculate_damage(monster_card)
+	var full_card_damage = monster_card.get_numerical_value()
+	if current_armor != null and full_card_damage < last_defended:
+		add_monster_card_to_armor(monster_card)
+	else:
+		var dispose_card: Array[PlayingCard] = [monster_card]
+		emit_signal("dispose_of_cards", dispose_card)
 	
 	# Calculates damages for instances where the armor isn't enough (0 otherwise)
-	if damage > effective_armor:
-		current_health = current_health - (damage - effective_armor)
+	current_health = current_health - damage_to_take
 	
 	# Sets current health
-	print("current_healt=" + str(current_health))
 	if current_health <= 0:
-		current_health = 0
 		emit_signal("player_death")
 	else:
-		emit_signal("monster_defeated", damage)
+		emit_signal("monster_defeated", full_card_damage)
 	set_health_ui(current_health)
+	emit_signal("card_finished_action")
+
+func calculate_damage(card: PlayingCard) -> int:
+	# Determines if current armor will be used (effective_armor)
+	# An armor that last defended a 5 can't defend against a 6 (takes full 6 damage)
+	var card_monster_damage = card.get_numerical_value()
+	if armor_is_effective(card_monster_damage):
+		var damage = card_monster_damage - current_armor.card.number
+		if damage < 0:
+			damage = 0
+		return damage
+	return card_monster_damage
+
+func armor_is_effective(monster_attack_power: int) -> bool:
+	return monster_attack_power < last_defended and current_armor != null
 
 # Adds the monster card on top of the armor card
 # Aesthetic choice to make the player dont forget the last defended enemy
@@ -76,14 +82,17 @@ func add_monster_card_to_armor(monster_card: PlayingCard):
 	# Adds the monster to the armor list
 	armor_position.add_child(monster_card)
 	n_monsters_defended += 1
+	last_defended = monster_card.get_numerical_value()
 
 # Switches the old armor card with the new one
 # Gets rid of all attatched monster cards
 func add_new_armor(new_armor: PlayingCard):
 	# Discards all cards in the Armor list (to clear the monster cards stored in there)
+	var dispose_card: Array[PlayingCard] = []
 	for card in armor_position.get_children():
 		armor_position.remove_child(card)
-		room_manager.discard_card(card)
+		dispose_card.append(card)
+	emit_signal("dispose_of_cards", dispose_card)
 	# Adds the new Armor card to the Armor list (resets postion)
 	# First resets the position because it will be a child of the location
 	new_armor.position = Vector2(0,0)
@@ -94,6 +103,7 @@ func add_new_armor(new_armor: PlayingCard):
 	last_defended = max_health + 1
 	n_monsters_defended = 0
 	armor_slot.region_rect = new_armor.card_visuals.get_visual()
+	emit_signal("card_finished_action")
 
 # Heals the player by the ammount on the card
 # The maximum ammount of heath is determined by max_health
@@ -105,8 +115,20 @@ func heal(card: PlayingCard):
 		current_health = max_health
 	# Sets new new heath value and dicards the card
 	set_health_ui(current_health)
-	room_manager.discard_card(card)
+	var dispose_card: Array[PlayingCard] = [card]
+	emit_signal("dispose_of_cards", dispose_card)
+	emit_signal("card_finished_action")
 
 func set_health_ui(new_health: int):
+	hero_blink_bar.visible = false
+	hero_blink_bar.value = new_health
 	var tween = create_tween()
 	tween.tween_property(hero_health_bar, "value", new_health, 1).set_trans(Tween.TRANS_SINE).set_delay(0)
+	await tween.finished
+	hero_blink_bar.visible = true
+
+func blink_preview_health(card: PlayingCard):
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(hero_health_bar, "tint_progress", Color(1,1,1,0), 1).set_delay(0)
+	tween.tween_property(hero_health_bar, "tint_progress", Color(1,1,1,1), 1).set_delay(0)

@@ -16,6 +16,7 @@ signal deck_defeated
 # This function must be called by any sprit that creates or uses PlayingDeck
 func start():
 	playing_deck = deck_generator.generate_scoundrel_deck()
+	print(playing_deck.deck.size())
 	show()
 	canvas_layer.visible = true
 	set_health(max_health)
