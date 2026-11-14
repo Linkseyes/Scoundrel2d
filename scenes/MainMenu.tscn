@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ynjp14wssoch"]
+
+[ext_resource type="FontFile" uid="uid://crg28dwf0csfx" path="res://assets/fonts/alagard.ttf" id="1_0ykhv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqorp"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wh52"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ykhv"]
+bg_color = Color(0.5803922, 0.6, 0.64705884, 0)
+
+[node name="MainMenu" type="Control" unique_id=1144405495]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="." unique_id=2020526349]
+modulate = Color(2.2873707, 3.3075147, 4.134045, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1996087777]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=966795347]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=129771152]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=610647047]
+texture_filter = 1
+custom_minimum_size = Vector2(370, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.73185277, 0.71860933, 2.3102762e-06, 1)
+theme_override_colors/font_shadow_color = Color(0.47843137, 0.18039216, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("1_0ykhv")
+theme_override_font_sizes/font_size = 60
+text = "Scoundrel 2D"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1257625910]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_pressed_color = Color(0.6360716, 0.58391327, 0, 1)
+theme_override_fonts/font = ExtResource("1_0ykhv")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_yqorp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0ykhv")
+text = "Start"
+alignment = 0
+icon_alignment = 1
