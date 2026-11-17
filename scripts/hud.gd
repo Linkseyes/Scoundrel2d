@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var restart_button: Button = $PanelContainer/RestartButton
+@onready var restart_button: Button = $Container/RestartButton
 #@onready var color_rect: ColorRect = $ColorRect
-@onready var message: Label = $PanelContainer/Message
+@onready var message: Label = $Container/Message
 
 func hide_hud():
 	message.hide()

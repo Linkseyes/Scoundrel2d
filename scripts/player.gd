@@ -26,9 +26,12 @@ signal dispose_of_cards(cards: Array[PlayingCard])
 signal card_finished_action
 
 func ready_player():
+	# Reset player health
 	current_health = max_health
 	canvas_layer.visible = true
 	set_health_ui(current_health)
+	# Reset armor
+	discard_current_armor()
 	current_armor = null
 	last_defended = max_health + 1
 	n_monsters_defended = 0
@@ -84,14 +87,8 @@ func add_monster_card_to_armor(monster_card: PlayingCard):
 	last_defended = monster_card.get_numerical_value()
 
 # Switches the old armor card with the new one
-# Gets rid of all attatched monster cards
 func add_new_armor(new_armor: PlayingCard):
-	# Discards all cards in the Armor list (to clear the monster cards stored in there)
-	var dispose_card: Array[PlayingCard] = []
-	for card in armor_position.get_children():
-		armor_position.remove_child(card)
-		dispose_card.append(card)
-	emit_signal("dispose_of_cards", dispose_card)
+	discard_current_armor()
 	# Adds the new Armor card to the Armor list (resets postion)
 	# First resets the position because it will be a child of the location
 	new_armor.position = Vector2(0,0)
@@ -103,6 +100,15 @@ func add_new_armor(new_armor: PlayingCard):
 	n_monsters_defended = 0
 	armor_slot.region_rect = new_armor.card_visuals.get_visual()
 	emit_signal("card_finished_action")
+
+# Discards the current armor and monster cards attached
+func discard_current_armor():
+	# Discards all cards in the Armor list (to clear the monster cards stored in there)
+	var dispose_card: Array[PlayingCard] = []
+	for card in armor_position.get_children():
+		armor_position.remove_child(card)
+		dispose_card.append(card)
+	emit_signal("dispose_of_cards", dispose_card)
 
 # Heals the player by the ammount on the card
 # The maximum ammount of heath is determined by max_health
