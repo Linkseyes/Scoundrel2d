@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://ynjp14wssoch"]
 
+[ext_resource type="Script" uid="uid://c5x2icmhv2htt" path="res://scripts/ui/main_menu.gd" id="1_bky6r"]
 [ext_resource type="LabelSettings" uid="uid://bsw0kbb3uxyuv" path="res://resources/main_menu/title_settings.tres" id="2_0ykhv"]
 [ext_resource type="LabelSettings" uid="uid://ch0fs2tgax6os" path="res://resources/main_menu/start_settings.tres" id="2_2wh52"]
-[ext_resource type="Script" uid="uid://dfonlkign58kn" path="res://scripts/ui/start_button.gd" id="2_ow34m"]
+[ext_resource type="Script" uid="uid://cldcq2dci8lsa" path="res://scripts/ui/main_menu_button.gd" id="3_8a8k8"]
 [ext_resource type="LabelSettings" uid="uid://iwdosvi7okd8" path="res://resources/main_menu/version_settings.tres" id="3_ow34m"]
-[ext_resource type="Script" uid="uid://df4gtl74ot4iw" path="res://scripts/ui/htp_button.gd" id="4_ucygd"]
 [ext_resource type="LabelSettings" uid="uid://b6510jlor07wa" path="res://resources/main_menu/htp_settings.tres" id="5_7la6k"]
-[ext_resource type="Script" uid="uid://ds1rm7u5fpbmh" path="res://scripts/ui/settings_button.gd" id="5_mipys"]
-[ext_resource type="Script" uid="uid://8c7byxfsd6ym" path="res://scripts/ui/exit_button.gd" id="6_8a8k8"]
 [ext_resource type="LabelSettings" uid="uid://clvdlmtlpy3l7" path="res://resources/main_menu/settings_settings.tres" id="7_2nypq"]
 [ext_resource type="LabelSettings" uid="uid://cqgvcq76fuuqk" path="res://resources/main_menu/exit_settings.tres" id="9_bky6r"]
+[ext_resource type="Texture2D" uid="uid://cwhl3pvwjpj1h" path="res://assets/art/playingcards/cards_dark_alt.PNG" id="12_l4mxc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wh52"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -29,6 +28,14 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l72w3"]
 content_margin_left = 10.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5faoh"]
+atlas = ExtResource("12_l4mxc")
+region = Rect2(18, 108, 17, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptake"]
+atlas = ExtResource("12_l4mxc")
+region = Rect2(18, 54, 17, 26)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7la6k"]
 load_path = "res://.godot/imported/DungeonMonsters.png-2c5c35de2f8543e7a6db71f612f1a677.ctex"
 
@@ -43,9 +50,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bky6r")
 
 [node name="Background" type="Panel" parent="." unique_id=2020526349]
-modulate = Color(2.2873707, 3.3075147, 4.134045, 1)
+modulate = Color(3.5262423, 2.0004873, 1.268748, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,10 +99,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
 theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
-script = ExtResource("2_ow34m")
+script = ExtResource("3_8a8k8")
 buttonText = NodePath("ButtonText")
-pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
-shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+pressed_color = Color(0.06666667, 0.85490197, 0.8980392, 1)
+shadow_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 
 [node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/StartButton" unique_id=463079462]
 texture_filter = 2
@@ -110,6 +118,7 @@ label_settings = ExtResource("2_2wh52")
 vertical_alignment = 1
 
 [node name="HTPButton" type="Button" parent="MarginContainer/VBoxContainer/Options" unique_id=1159488635 node_paths=PackedStringArray("buttonText")]
+visible = false
 custom_minimum_size = Vector2(232.325, 38)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -118,10 +127,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
 theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
-script = ExtResource("4_ucygd")
+script = ExtResource("3_8a8k8")
 buttonText = NodePath("ButtonText")
-pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
-shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+pressed_color = Color(0.06666667, 0.85490197, 0.8980392, 1)
+shadow_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 
 [node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/HTPButton" unique_id=1067784895]
 texture_filter = 2
@@ -137,6 +146,7 @@ label_settings = ExtResource("5_7la6k")
 vertical_alignment = 1
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer/Options" unique_id=1229889292 node_paths=PackedStringArray("buttonText")]
+visible = false
 custom_minimum_size = Vector2(162.985, 38)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -145,10 +155,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
 theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
-script = ExtResource("5_mipys")
+script = ExtResource("3_8a8k8")
 buttonText = NodePath("ButtonText")
-pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
-shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+pressed_color = Color(0.06666667, 0.85490197, 0.8980392, 1)
+shadow_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 
 [node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/SettingsButton" unique_id=772789806]
 texture_filter = 2
@@ -172,10 +182,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
 theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
-script = ExtResource("6_8a8k8")
+script = ExtResource("3_8a8k8")
 buttonText = NodePath("ButtonText")
-pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
-shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+pressed_color = Color(0.06666667, 0.85490197, 0.8980392, 1)
+shadow_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 
 [node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/ExitButton" unique_id=165630901]
 texture_filter = 2
@@ -197,30 +207,62 @@ vertical_alignment = 1
 texture_filter = 2
 custom_minimum_size = Vector2(20, 30)
 layout_mode = 2
-text = "0.0.1-beta"
+text = "v1.2.0-beta"
 label_settings = ExtResource("3_ow34m")
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="DeckAtlasTexture4" type="Sprite2D" parent="MarginContainer" unique_id=1088029370]
+texture_filter = 1
+position = Vector2(346, 228)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_5faoh")
+
+[node name="DeckAtlasTexture3" type="Sprite2D" parent="MarginContainer" unique_id=87073590]
+texture_filter = 1
+position = Vector2(358, 240)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_5faoh")
+
+[node name="DeckAtlasTexture2" type="Sprite2D" parent="MarginContainer" unique_id=1922271289]
+texture_filter = 1
+position = Vector2(370, 252.00002)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_5faoh")
+
+[node name="DeckAtlasTexture1" type="Sprite2D" parent="MarginContainer" unique_id=1143881517]
+texture_filter = 1
+position = Vector2(497, 252)
+scale = Vector2(6, 6)
+texture = SubResource("AtlasTexture_ptake")
+
 [node name="MonsterAtlasTexture" type="Sprite2D" parent="MarginContainer" unique_id=1125443994]
 texture_filter = 1
-position = Vector2(459, 169)
-scale = Vector2(4, 4)
+position = Vector2(500, 108)
+scale = Vector2(6, 6)
 texture = SubResource("AtlasTexture_2nypq")
 
 [connection signal="button_down" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_button_down"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_button_up"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_mouse_exited"]
+[connection signal="on_button_pressed" from="MarginContainer/VBoxContainer/Options/StartButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_button_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_button_down"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_button_up"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_mouse_exited"]
+[connection signal="on_button_pressed" from="MarginContainer/VBoxContainer/Options/HTPButton" to="." method="_on_htp_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_button_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_button_down"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_button_up"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_mouse_exited"]
+[connection signal="on_button_pressed" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_button_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_button_down"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_button_up"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_mouse_exited"]
+[connection signal="on_button_pressed" from="MarginContainer/VBoxContainer/Options/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_button_pressed"]

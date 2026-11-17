@@ -15,9 +15,11 @@ extends Node
 var current_discard: PlayingCard 
 
 func start_game():
-	# Starts Player
 	player.ready_player()
+	
 	generate_new_room()
+	discard_pile.remove_child(current_discard)
+	
 	next_button.deactivate()
 	reroll_button.activate()
 
