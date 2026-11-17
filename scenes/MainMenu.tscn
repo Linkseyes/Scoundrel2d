@@ -1,18 +1,40 @@
 [gd_scene format=3 uid="uid://ynjp14wssoch"]
 
-[ext_resource type="FontFile" uid="uid://crg28dwf0csfx" path="res://assets/fonts/alagard.ttf" id="1_0ykhv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqorp"]
-content_margin_left = 10.0
-content_margin_right = 10.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[ext_resource type="LabelSettings" uid="uid://bsw0kbb3uxyuv" path="res://resources/main_menu/title_settings.tres" id="2_0ykhv"]
+[ext_resource type="LabelSettings" uid="uid://ch0fs2tgax6os" path="res://resources/main_menu/start_settings.tres" id="2_2wh52"]
+[ext_resource type="Script" uid="uid://dfonlkign58kn" path="res://scripts/ui/start_button.gd" id="2_ow34m"]
+[ext_resource type="LabelSettings" uid="uid://iwdosvi7okd8" path="res://resources/main_menu/version_settings.tres" id="3_ow34m"]
+[ext_resource type="Script" uid="uid://df4gtl74ot4iw" path="res://scripts/ui/htp_button.gd" id="4_ucygd"]
+[ext_resource type="LabelSettings" uid="uid://b6510jlor07wa" path="res://resources/main_menu/htp_settings.tres" id="5_7la6k"]
+[ext_resource type="Script" uid="uid://ds1rm7u5fpbmh" path="res://scripts/ui/settings_button.gd" id="5_mipys"]
+[ext_resource type="Script" uid="uid://8c7byxfsd6ym" path="res://scripts/ui/exit_button.gd" id="6_8a8k8"]
+[ext_resource type="LabelSettings" uid="uid://clvdlmtlpy3l7" path="res://resources/main_menu/settings_settings.tres" id="7_2nypq"]
+[ext_resource type="LabelSettings" uid="uid://cqgvcq76fuuqk" path="res://resources/main_menu/exit_settings.tres" id="9_bky6r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wh52"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-draw_center = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ykhv"]
-bg_color = Color(0.5803922, 0.6, 0.64705884, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ow34m"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l72w3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_826wr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucygd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l72w3"]
+content_margin_left = 10.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7la6k"]
+load_path = "res://.godot/imported/DungeonMonsters.png-2c5c35de2f8543e7a6db71f612f1a677.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nypq"]
+atlas = SubResource("CompressedTexture2D_7la6k")
+region = Rect2(24, 0, 24, 32)
 
 [node name="MainMenu" type="Control" unique_id=1144405495]
 layout_mode = 3
@@ -43,37 +65,162 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=966795347]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=129771152]
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=129771152]
-layout_mode = 2
+theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=610647047]
-texture_filter = 1
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=610647047]
+texture_filter = 2
 custom_minimum_size = Vector2(370, 60)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.73185277, 0.71860933, 2.3102762e-06, 1)
-theme_override_colors/font_shadow_color = Color(0.47843137, 0.18039216, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("1_0ykhv")
-theme_override_font_sizes/font_size = 60
 text = "Scoundrel 2D"
+label_settings = ExtResource("2_0ykhv")
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1257625910]
-texture_filter = 1
+[node name="Options" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1953168203]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/Options" unique_id=1383814652 node_paths=PackedStringArray("buttonText")]
+custom_minimum_size = Vector2(107.495, 38)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/font_pressed_color = Color(0.6360716, 0.58391327, 0, 1)
-theme_override_fonts/font = ExtResource("1_0ykhv")
-theme_override_font_sizes/font_size = 42
-theme_override_styles/normal = SubResource("StyleBoxFlat_yqorp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
+script = ExtResource("2_ow34m")
+buttonText = NodePath("ButtonText")
+pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
+shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+
+[node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/StartButton" unique_id=463079462]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l72w3")
 text = "Start"
-alignment = 0
-icon_alignment = 1
+label_settings = ExtResource("2_2wh52")
+vertical_alignment = 1
+
+[node name="HTPButton" type="Button" parent="MarginContainer/VBoxContainer/Options" unique_id=1159488635 node_paths=PackedStringArray("buttonText")]
+custom_minimum_size = Vector2(232.325, 38)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
+script = ExtResource("4_ucygd")
+buttonText = NodePath("ButtonText")
+pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
+shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+
+[node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/HTPButton" unique_id=1067784895]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l72w3")
+text = "How To Play"
+label_settings = ExtResource("5_7la6k")
+vertical_alignment = 1
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer/Options" unique_id=1229889292 node_paths=PackedStringArray("buttonText")]
+custom_minimum_size = Vector2(162.985, 38)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
+script = ExtResource("5_mipys")
+buttonText = NodePath("ButtonText")
+pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
+shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+
+[node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/SettingsButton" unique_id=772789806]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l72w3")
+text = "Settings"
+label_settings = ExtResource("7_2nypq")
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/Options" unique_id=28577216 node_paths=PackedStringArray("buttonText")]
+custom_minimum_size = Vector2(107.495, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ow34m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_l72w3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_826wr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ucygd")
+script = ExtResource("6_8a8k8")
+buttonText = NodePath("ButtonText")
+pressed_color = Color(0.06518329, 0.8545127, 0.8973227, 1)
+shadow_color = Color(0.09923177, 0.09923177, 0.0992317, 1)
+
+[node name="ButtonText" type="Label" parent="MarginContainer/VBoxContainer/Options/ExitButton" unique_id=165630901]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.5
+offset_right = -11.7400055
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l72w3")
+text = "Exit"
+label_settings = ExtResource("9_bky6r")
+vertical_alignment = 1
+
+[node name="Version" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1111135186]
+texture_filter = 2
+custom_minimum_size = Vector2(20, 30)
+layout_mode = 2
+text = "0.0.1-beta"
+label_settings = ExtResource("3_ow34m")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MonsterAtlasTexture" type="Sprite2D" parent="MarginContainer" unique_id=1125443994]
+texture_filter = 1
+position = Vector2(459, 169)
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_2nypq")
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_button_down"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/StartButton" to="MarginContainer/VBoxContainer/Options/StartButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_button_down"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/HTPButton" to="MarginContainer/VBoxContainer/Options/HTPButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_button_down"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/SettingsButton" to="MarginContainer/VBoxContainer/Options/SettingsButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_button_down"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options/ExitButton" to="MarginContainer/VBoxContainer/Options/ExitButton" method="_on_mouse_exited"]
